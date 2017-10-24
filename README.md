@@ -34,5 +34,14 @@ command
 
 run docker
 ```
-nvidia-docker run --name deepbench --rm -ti  nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04 bash
+nvidia-docker run --name deepbench --rm -ti  nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04 bash
 ```
+
+## environment
+
+| name | gcc | cuda Toolkit | Cudnn | gpu | os | pass? | note
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| meaka | 4.8.4 | 9.0 | 9.0 | c2050 x2 | centos 7 | No | gpu not support
+| 92 | 6.3 | 9.0 | 9.0 | 1080 | ubuntu 16.04 | No | build fail
+| 91 | 5.4.0 | 9.0 | 9.0 | k40 | ubuntu 17.04 | Yes | use nvidia-docker
+
