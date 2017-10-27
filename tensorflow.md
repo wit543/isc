@@ -159,3 +159,64 @@ Please note that MKL on MacOS or windows is still not supported.
 If you would like to use a local MKL instead of downloading, please set the environment variable "TF_MKL_ROOT" every time before build.
 Configuration finished
 ```
+
+open mpi
+
+```
+cd /root
+wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.gz
+tar xvf openmpi-*
+cd openmpi-*
+./configure --prefix="/root/.openmpi"
+make
+make install
+echo export PATH="$PATH:/root/.openmpi/bin" >> /root/.bashrc
+echo export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/root/.openmpi/lib/" >> /root/.bashrc
+
+```
+
+```
+Required build parameters:
+  TF_DOCKER_BUILD_TYPE=gpu
+  TF_DOCKER_BUILD_IS_DEVEL=yes
+  TF_DOCKER_BUILD_DEVEL_BRANCH=
+
+Optional build parameters:
+  TF_DOCKER_BUILD_CENTRAL_PIP=http://ci.tensorflow.org/view/Nightly/job/nightly-python35-linux-cpu/lastSuccessfulBuild/artifact/pip_test/whl/tensorflow--cp35-cp35m-manylinux1_x86_64.whl
+  TF_DOCKER_BUILD_IMAGE_NAME=
+  TF_DOCKER_BUILD_VERSION=
+  TF_DOCKER_BUILD_PORT=
+  TF_DOCKER_BUILD_PUSH_CMD=
+ERROR: TF_DOCKER_BUILD_DEVEL_BRANCH is missing for devel docker build
+[boss@CudaL tensorflow]$ export TF_DOCKER_BUILD_DEVEL_BRANCH=devel-gpu-cuda9-cudnn7
+[boss@CudaL tensorflow]$ tensorflow/tools/docker/parameterized_docker_build.sh
+Required build parameters:
+  TF_DOCKER_BUILD_TYPE=gpu
+  TF_DOCKER_BUILD_IS_DEVEL=yes
+  TF_DOCKER_BUILD_DEVEL_BRANCH=devel-gpu-cuda9-cudnn7
+
+Optional build parameters:
+  TF_DOCKER_BUILD_CENTRAL_PIP=http://ci.tensorflow.org/view/Nightly/job/nightly-python35-linux-cpu/lastSuccessfulBuild/artifact/pip_test/whl/tensorflow--cp35-cp35m-manylinux1_x86_64.whl
+  TF_DOCKER_BUILD_IMAGE_NAME=
+  TF_DOCKER_BUILD_VERSION=
+  TF_DOCKER_BUILD_PORT=
+  TF_DOCKER_BUILD_PUSH_CMD=
+```
+
+
+[tensorflow export config](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/tools/docker)
+
+```bash
+export TF_DOCKER_BUILD_IS_DEVEL=YES
+export TF_DOCKER_BUILD_TYPE=GPU
+export TF_DOCKER_BUILD_PYTHON_VERSION=PYTHON3
+export TF_DOCKER_BUILD_DEVEL_BRANCH=r1.4
+export TF_DOCKER_BUILD_IMAGE_NAME=dockerTF
+export TF_DOCKER_BUILD_VERSION=0.1
+export TF_DOCKER_BUILD_PORT=6789
+export NIGHTLY_VERSION="1.head"
+export TF_DOCKER_BUILD_CENTRAL_PIP=$(echo ${TF_DOCKER_BUILD_PYTHON_VERSION} | sed s^PYTHON2^http://ci.tensorflow.org/view/Nightly/job/nightly-matrix-cpu/TF_BUILD_IS_OPT=OPT,TF_BUILD_IS_PIP=PIP,TF_BUILD_PYTHON_VERSION=${TF_DOCKER_BUILD_PYTHON_VERSION},label=cpu-slave/lastSuccessfulBuild/artifact/pip_test/whl/tensorflow-${NIGHTLY_VERSION}-cp27-cp27mu-manylinux1_x86_64.whl^ | sed s^PYTHON3^http://ci.tensorflow.org/view/Nightly/job/nightly-python35-linux-cpu/lastSuccessfulBuild/artifact/pip_test/whl/tensorflow-${NIGHTLY_VERSION}-cp35-cp35m-manylinux1_x86_64.whl^)
+
+# tensorflow/
+tensorflow/tools/docker/parameterized_docker_build.sh
+```

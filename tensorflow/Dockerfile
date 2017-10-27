@@ -1,6 +1,5 @@
 FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
-LABEL maintainer="Gunhan Gulsoy <gunan@google.com>"
 
 # It is possible to override these for releases.
 ARG TF_BRANCH=master
