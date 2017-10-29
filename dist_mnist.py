@@ -146,25 +146,21 @@ def main(_):
     num_epochs = NUM_EPOCHS
   train_size = train_labels.shape[0]
 
-  # Distributed
-  ps_hosts = FLAGS.ps_hosts.split(",")
-  worker_hosts = FLAGS.worker_hosts.split(",")
+  cluster = tf.train.ClusterSpec({
+        "worker": [
+            "worker0.example.com:2222",
+            "worker1.example.com:2222",
+            "worker2.example.com:2222"
+        ],
+        "ps": [
+            "ps0.example.com:2222",
+            "ps1.example.com:2222"
+        ]})
 
-  # Create a cluster from the parameter server and worker hosts.
-  cluster = tf.train.ClusterSpec({"ps": ps_hosts, "worker": worker_hosts})
 
-  # Create and start a server for the local task.
-  server = tf.train.Server(cluster,
-                          job_name=FLAGS.job_name,
-                          task_index=FLAGS.task_index)
 
-  # Create a cluster from the parameter server and worker hosts.
-  cluster = tf.train.ClusterSpec({"ps": ps_hosts, "worker": worker_hosts})
 
-  # Create and start a server for the local task.
-  server = tf.train.Server(cluster,
-                           job_name=FLAGS.job_name,
-                           task_index=FLAGS.task_index)
+
 
   # This is where training samples and labels are fed to the graph.
   # These placeholder nodes will be fed a batch of training data at each
@@ -180,32 +176,29 @@ def main(_):
   # The variables below hold all the trainable weights. They are passed an
   # initial value which will be assigned when we call:
   # {tf.global_variables_initializer().run()}
-  conv1_weights = tf.Variable(
-      tf.truncated_normal([5, 5, NUM_CHANNELS, 32],  # 5x5 filter, depth 32.
-                          stddev=0.1,
-                          seed=SEED, dtype=data_type()))
-  conv1_biases = tf.Variable(tf.zeros([32], dtype=data_type()))
-  conv2_weights = tf.Variable(tf.truncated_normal(
-      [5, 5, 32, 64], stddev=0.1,
-      seed=SEED, dtype=data_type()))
-  conv2_biases = tf.Variable(tf.constant(0.1, shape=[64], dtype=data_type()))
-  fc1_weights = tf.Variable(  # fully connected, depth 512.
-      tf.truncated_normal([IMAGE_SIZE // 4 * IMAGE_SIZE // 4 * 64, 512],
-                          stddev=0.1,
-                          seed=SEED,
-                          dtype=data_type()))
-  fc1_biases = tf.Variable(tf.constant(0.1, shape=[512], dtype=data_type()))
-  fc2_weights = tf.Variable(tf.truncated_normal([512, NUM_LABELS],
-                          stddev=0.1,
-                          seed=SEED,
-                          dtype=data_type()))
-  fc2_biases = tf.Variable(tf.constant(
-      0.1, shape=[NUM_LABELS], dtype=data_type()))
-
-  if FLAGS.job_name == "ps":
-    server.join()
-elif FLAGS.job_name == "worker":
-  
+  with tf.device("/job:ps/task:0"):
+    conv1_weights = tf.Variable(
+        tf.truncated_normal([5, 5, NUM_CHANNELS, 32],  # 5x5 filter, depth 32.
+                            stddev=0.1,
+                            seed=SEED, dtype=data_type()))
+    conv1_biases = tf.Variable(tf.zeros([32], dtype=data_type()))
+    conv2_weights = tf.Variable(tf.truncated_normal(
+        [5, 5, 32, 64], stddev=0.1,
+        seed=SEED, dtype=data_type()))
+    conv2_biases = tf.Variable(tf.constant(0.1, shape=[64], dtype=data_type()))
+  with tf.device("/job:ps/task:0"):
+    fc1_weights = tf.Variable(  # fully connected, depth 512.
+        tf.truncated_normal([IMAGE_SIZE // 4 * IMAGE_SIZE // 4 * 64, 512],
+                            stddev=0.1,
+                            seed=SEED,
+                            dtype=data_type()))
+    fc1_biases = tf.Variable(tf.constant(0.1, shape=[512], dtype=data_type()))
+    fc2_weights = tf.Variable(tf.truncated_normal([512, NUM_LABELS],
+                            stddev=0.1,
+                            seed=SEED,
+                            dtype=data_type()))
+    fc2_biases = tf.Variable(tf.constant(
+        0.1, shape=[NUM_LABELS], dtype=data_type()))
   # We will replicate the model structure for the training subgraph, as well
   # as the evaluation subgraphs, while sharing the trainable parameters.
   def model(data, train=False):
@@ -213,41 +206,46 @@ elif FLAGS.job_name == "worker":
     # 2D convolution, with 'SAME' padding (i.e. the output feature map has
     # the same size as the input). Note that {strides} is a 4D array whose
     # shape matches the data layout: [image index, y, x, depth].
-    conv = tf.nn.conv2d(data,
-                        conv1_weights,
-                        strides=[1, 1, 1, 1],
-                        padding='SAME')
-    # Bias and rectified linear non-linearity.
-    relu = tf.nn.relu(tf.nn.bias_add(conv, conv1_biases))
-    # Max pooling. The kernel size spec {ksize} also follows the layout of
-    # the data. Here we have a pooling window of 2, and a stride of 2.
-    pool = tf.nn.max_pool(relu,
-                          ksize=[1, 2, 2, 1],
-                          strides=[1, 2, 2, 1],
+    
+    with tf.device("/job:worker/task:0"):
+      conv = tf.nn.conv2d(data,
+                          conv1_weights,
+                          strides=[1, 1, 1, 1],
                           padding='SAME')
-    conv = tf.nn.conv2d(pool,
-                        conv2_weights,
-                        strides=[1, 1, 1, 1],
-                        padding='SAME')
-    relu = tf.nn.relu(tf.nn.bias_add(conv, conv2_biases))
-    pool = tf.nn.max_pool(relu,
-                          ksize=[1, 2, 2, 1],
-                          strides=[1, 2, 2, 1],
+      # Bias and rectified linear non-linearity.
+      relu = tf.nn.relu(tf.nn.bias_add(conv, conv1_biases))
+      # Max pooling. The kernel size spec {ksize} also follows the layout of
+      # the data. Here we have a pooling window of 2, and a stride of 2.
+      pool = tf.nn.max_pool(relu,
+                            ksize=[1, 2, 2, 1],
+                            strides=[1, 2, 2, 1],
+                            padding='SAME')
+    with tf.device("/job:worker/task:1"):
+      conv = tf.nn.conv2d(pool,
+                          conv2_weights,
+                          strides=[1, 1, 1, 1],
                           padding='SAME')
+      relu = tf.nn.relu(tf.nn.bias_add(conv, conv2_biases))
+      pool = tf.nn.max_pool(relu,
+                            ksize=[1, 2, 2, 1],
+                            strides=[1, 2, 2, 1],
+                            padding='SAME')
+                            
     # Reshape the feature map cuboid into a 2D matrix to feed it to the
     # fully connected layers.
-    pool_shape = pool.get_shape().as_list()
-    reshape = tf.reshape(
-        pool,
-        [pool_shape[0], pool_shape[1] * pool_shape[2] * pool_shape[3]])
-    # Fully connected layer. Note that the '+' operation automatically
-    # broadcasts the biases.
-    hidden = tf.nn.relu(tf.matmul(reshape, fc1_weights) + fc1_biases)
-    # Add a 50% dropout during training only. Dropout also scales
-    # activations such that no rescaling is needed at evaluation time.
-    if train:
-      hidden = tf.nn.dropout(hidden, 0.5, seed=SEED)
-    return tf.matmul(hidden, fc2_weights) + fc2_biases
+    with tf.device("/job:worker/task:2"):
+      pool_shape = pool.get_shape().as_list()
+      reshape = tf.reshape(
+          pool,
+          [pool_shape[0], pool_shape[1] * pool_shape[2] * pool_shape[3]])
+      # Fully connected layer. Note that the '+' operation automatically
+      # broadcasts the biases.
+      hidden = tf.nn.relu(tf.matmul(reshape, fc1_weights) + fc1_biases)
+      # Add a 50% dropout during training only. Dropout also scales
+      # activations such that no rescaling is needed at evaluation time.
+      if train:
+        hidden = tf.nn.dropout(hidden, 0.5, seed=SEED)
+      return tf.matmul(hidden, fc2_weights) + fc2_biases
 
   # Training computation: logits + cross-entropy loss.
   logits = model(train_data_node, True)
