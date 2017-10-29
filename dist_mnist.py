@@ -155,6 +155,14 @@ def main(_):
 
   # Create and start a server for the local task.
   server = tf.train.Server(cluster,
+                          job_name=FLAGS.job_name,
+                          task_index=FLAGS.task_index)
+
+  # Create a cluster from the parameter server and worker hosts.
+  cluster = tf.train.ClusterSpec({"ps": ps_hosts, "worker": worker_hosts})
+
+  # Create and start a server for the local task.
+  server = tf.train.Server(cluster,
                            job_name=FLAGS.job_name,
                            task_index=FLAGS.task_index)
 
@@ -188,12 +196,16 @@ def main(_):
                           dtype=data_type()))
   fc1_biases = tf.Variable(tf.constant(0.1, shape=[512], dtype=data_type()))
   fc2_weights = tf.Variable(tf.truncated_normal([512, NUM_LABELS],
-                                                stddev=0.1,
-                                                seed=SEED,
-                                                dtype=data_type()))
+                          stddev=0.1,
+                          seed=SEED,
+                          dtype=data_type()))
   fc2_biases = tf.Variable(tf.constant(
       0.1, shape=[NUM_LABELS], dtype=data_type()))
 
+  if FLAGS.job_name == "ps":
+    server.join()
+elif FLAGS.job_name == "worker":
+  
   # We will replicate the model structure for the training subgraph, as well
   # as the evaluation subgraphs, while sharing the trainable parameters.
   def model(data, train=False):
