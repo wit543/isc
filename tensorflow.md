@@ -221,7 +221,13 @@ export TF_DOCKER_BUILD_CENTRAL_PIP=$(echo ${TF_DOCKER_BUILD_PYTHON_VERSION} | se
 tensorflow/tools/docker/parameterized_docker_build.sh
 ```
 
+## run
 
+```bash
+docker run -p 8890:8888 --name w1 -it boss/test:latest bash
+docker run -p 2222:2222 --name w1 -it boss/tensor:lastest bash
+python3 isac.py --job_name="ps" --task_index=0
+```
 ## Result
 
 1 worker
