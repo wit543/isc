@@ -106,3 +106,13 @@ nvidia-docker run --name deepbench --rm -ti  nvidia/cuda:9.0-cudnn7-devel-ubuntu
 | gru | 512 | 32 | 1 | half | 249 | 541|
 | gru | 1024 | 32 | 1500 | half | 596599 | 1447135|
 | gru | 1024 | 64 | 1500 | half | 615169 | 1468933
+
+
+## run
+
+```bash
+docker run -p 8890:8888 --name w1 -it boss/test:latest bash
+python3 isac.py --job_name="ps" --task_index=0
+```
+172.17.0.5
+172.17.0.6
