@@ -225,8 +225,8 @@ tensorflow/tools/docker/parameterized_docker_build.sh
 
 ```bash
 # distributed w1 w2 w3 w4
-docker run -p 8890:8888 --name w1 -it tensorflow:latest bash # images in 91
-docker run -p 2222:2222 --name w1 -it tensorlfow:latest bash # iamges in 91
+docker run -p 8890:8888 --name w1 -it tensorflow:gpu bash # images in 91
+docker run -p 2222:2222 --name w1 -it tensorlfow:gpu bash # iamges in 91
 python3 isac.py --job_name="ps" --task_index=0
 
 # single p1
