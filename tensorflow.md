@@ -1325,3 +1325,174 @@ Total Time: 99.18s
 Final Cost: 1.7772
 done
 ```
+
+
+gpu normal stat
+
+```bash
+Wed Nov  1 19:54:35 2017       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 384.81                 Driver Version: 384.81                    |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K40c          Off  | 00000000:01:00.0 Off |                    0 |
+| 26%   51C    P0    68W / 235W |  10950MiB / 11439MiB |     35%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0     19528      C   python3                                      569MiB |
+|    0     23839      C   python3                                    10368MiB |
++-----------------------------------------------------------------------------+
+```
+
+gpu 1 worker
+
+```bash
+root@946836e59352:~/tensorflow-example# python3 isac.py --job_name="worker" --task_index=0
+2017-11-01 12:54:17.422989: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-01 12:54:17.521515: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:892] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2017-11-01 12:54:17.521974: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: Tesla K40c major: 3 minor: 5 memoryClockRate(GHz): 0.745
+pciBusID: 0000:01:00.0
+totalMemory: 11.17GiB freeMemory: 10.54GiB
+2017-11-01 12:54:17.522022: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K40c, pci bus id: 0000:01:00.0, compute capability: 3.5)
+E1101 12:54:17.654673918      15 ev_epoll1_linux.c:1051]     grpc epoll fd: 19
+2017-11-01 12:54:17.659420: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> localhost:2222}
+2017-11-01 12:54:17.659944: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Variables initialized ...
+2017-11-01 12:54:18.618134: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 9507a37038c4631e with config: 
+WARNING:tensorflow:Standard services need a 'logdir' passed to the SessionManager
+Step: 100,  Epoch:  1,  Batch: 100 of 550,  Cost: 8.4845,  AvgTime: 5.55ms
+Step: 200,  Epoch:  1,  Batch: 200 of 550,  Cost: 9.2572,  AvgTime: 1.55ms
+Step: 300,  Epoch:  1,  Batch: 300 of 550,  Cost: 7.5180,  AvgTime: 1.59ms
+Step: 400,  Epoch:  1,  Batch: 400 of 550,  Cost: 7.1623,  AvgTime: 1.57ms
+Step: 500,  Epoch:  1,  Batch: 500 of 550,  Cost: 8.1273,  AvgTime: 1.56ms
+Step: 550,  Epoch:  1,  Batch: 550 of 550,  Cost: 7.6264,  AvgTime: 0.81ms
+Step: 650,  Epoch:  2,  Batch: 100 of 550,  Cost: 6.9238,  AvgTime: 2.46ms
+Step: 750,  Epoch:  2,  Batch: 200 of 550,  Cost: 6.4809,  AvgTime: 1.63ms
+Step: 850,  Epoch:  2,  Batch: 300 of 550,  Cost: 6.6782,  AvgTime: 1.55ms
+Step: 950,  Epoch:  2,  Batch: 400 of 550,  Cost: 6.6423,  AvgTime: 1.51ms
+Step: 1050,  Epoch:  2,  Batch: 500 of 550,  Cost: 5.5324,  AvgTime: 1.54ms
+Step: 1100,  Epoch:  2,  Batch: 550 of 550,  Cost: 6.9342,  AvgTime: 0.79ms
+Step: 1200,  Epoch:  3,  Batch: 100 of 550,  Cost: 6.6369,  AvgTime: 2.46ms
+Step: 1300,  Epoch:  3,  Batch: 200 of 550,  Cost: 6.3486,  AvgTime: 1.54ms
+Step: 1400,  Epoch:  3,  Batch: 300 of 550,  Cost: 6.0123,  AvgTime: 1.54ms
+Step: 1500,  Epoch:  3,  Batch: 400 of 550,  Cost: 5.5881,  AvgTime: 1.58ms
+Step: 1600,  Epoch:  3,  Batch: 500 of 550,  Cost: 5.7979,  AvgTime: 1.54ms
+Step: 1650,  Epoch:  3,  Batch: 550 of 550,  Cost: 5.3811,  AvgTime: 0.78ms
+Step: 1750,  Epoch:  4,  Batch: 100 of 550,  Cost: 4.9378,  AvgTime: 2.49ms
+Step: 1850,  Epoch:  4,  Batch: 200 of 550,  Cost: 5.9652,  AvgTime: 1.60ms
+Step: 1950,  Epoch:  4,  Batch: 300 of 550,  Cost: 6.1138,  AvgTime: 1.60ms
+Step: 2050,  Epoch:  4,  Batch: 400 of 550,  Cost: 6.0426,  AvgTime: 1.52ms
+Step: 2150,  Epoch:  4,  Batch: 500 of 550,  Cost: 5.7479,  AvgTime: 1.54ms
+Step: 2200,  Epoch:  4,  Batch: 550 of 550,  Cost: 6.0231,  AvgTime: 0.79ms
+Step: 2300,  Epoch:  5,  Batch: 100 of 550,  Cost: 5.7246,  AvgTime: 2.43ms
+Step: 2400,  Epoch:  5,  Batch: 200 of 550,  Cost: 5.9427,  AvgTime: 1.54ms
+Step: 2500,  Epoch:  5,  Batch: 300 of 550,  Cost: 4.9957,  AvgTime: 1.54ms
+Step: 2600,  Epoch:  5,  Batch: 400 of 550,  Cost: 5.3487,  AvgTime: 1.55ms
+Step: 2700,  Epoch:  5,  Batch: 500 of 550,  Cost: 5.4644,  AvgTime: 1.55ms
+Step: 2750,  Epoch:  5,  Batch: 550 of 550,  Cost: 5.6939,  AvgTime: 0.82ms
+Step: 2850,  Epoch:  6,  Batch: 100 of 550,  Cost: 5.0453,  AvgTime: 2.51ms
+Step: 2950,  Epoch:  6,  Batch: 200 of 550,  Cost: 4.7174,  AvgTime: 1.57ms
+Step: 3050,  Epoch:  6,  Batch: 300 of 550,  Cost: 4.7283,  AvgTime: 1.57ms
+Step: 3150,  Epoch:  6,  Batch: 400 of 550,  Cost: 5.1781,  AvgTime: 1.63ms
+Step: 3250,  Epoch:  6,  Batch: 500 of 550,  Cost: 4.9131,  AvgTime: 1.60ms
+Step: 3300,  Epoch:  6,  Batch: 550 of 550,  Cost: 5.1008,  AvgTime: 0.77ms
+Step: 3400,  Epoch:  7,  Batch: 100 of 550,  Cost: 4.6000,  AvgTime: 2.41ms
+Step: 3500,  Epoch:  7,  Batch: 200 of 550,  Cost: 4.9963,  AvgTime: 1.56ms
+Step: 3600,  Epoch:  7,  Batch: 300 of 550,  Cost: 5.7398,  AvgTime: 1.57ms
+Step: 3700,  Epoch:  7,  Batch: 400 of 550,  Cost: 4.7356,  AvgTime: 1.55ms
+Step: 3800,  Epoch:  7,  Batch: 500 of 550,  Cost: 4.8296,  AvgTime: 1.54ms
+Step: 3850,  Epoch:  7,  Batch: 550 of 550,  Cost: 4.4767,  AvgTime: 0.78ms
+Step: 3950,  Epoch:  8,  Batch: 100 of 550,  Cost: 5.0803,  AvgTime: 2.43ms
+Step: 4050,  Epoch:  8,  Batch: 200 of 550,  Cost: 4.5490,  AvgTime: 1.54ms
+Step: 4150,  Epoch:  8,  Batch: 300 of 550,  Cost: 4.9804,  AvgTime: 1.61ms
+Step: 4250,  Epoch:  8,  Batch: 400 of 550,  Cost: 4.4189,  AvgTime: 1.63ms
+Step: 4350,  Epoch:  8,  Batch: 500 of 550,  Cost: 4.5551,  AvgTime: 1.55ms
+Step: 4400,  Epoch:  8,  Batch: 550 of 550,  Cost: 5.1005,  AvgTime: 0.78ms
+Step: 4500,  Epoch:  9,  Batch: 100 of 550,  Cost: 4.7696,  AvgTime: 2.42ms
+Step: 4600,  Epoch:  9,  Batch: 200 of 550,  Cost: 4.5685,  AvgTime: 1.54ms
+Step: 4700,  Epoch:  9,  Batch: 300 of 550,  Cost: 4.3055,  AvgTime: 1.52ms
+Step: 4800,  Epoch:  9,  Batch: 400 of 550,  Cost: 4.1359,  AvgTime: 1.57ms
+Step: 4900,  Epoch:  9,  Batch: 500 of 550,  Cost: 4.5809,  AvgTime: 1.55ms
+Step: 4950,  Epoch:  9,  Batch: 550 of 550,  Cost: 4.7061,  AvgTime: 0.77ms
+Step: 5050,  Epoch: 10,  Batch: 100 of 550,  Cost: 4.5513,  AvgTime: 2.44ms
+Step: 5150,  Epoch: 10,  Batch: 200 of 550,  Cost: 4.5223,  AvgTime: 1.55ms
+Step: 5250,  Epoch: 10,  Batch: 300 of 550,  Cost: 4.9111,  AvgTime: 1.54ms
+Step: 5350,  Epoch: 10,  Batch: 400 of 550,  Cost: 4.4025,  AvgTime: 1.58ms
+Step: 5450,  Epoch: 10,  Batch: 500 of 550,  Cost: 4.9710,  AvgTime: 1.54ms
+Step: 5500,  Epoch: 10,  Batch: 550 of 550,  Cost: 4.2297,  AvgTime: 0.80ms
+Step: 5600,  Epoch: 11,  Batch: 100 of 550,  Cost: 4.4772,  AvgTime: 2.48ms
+Step: 5700,  Epoch: 11,  Batch: 200 of 550,  Cost: 5.6744,  AvgTime: 1.60ms
+Step: 5800,  Epoch: 11,  Batch: 300 of 550,  Cost: 4.6634,  AvgTime: 1.59ms
+Step: 5900,  Epoch: 11,  Batch: 400 of 550,  Cost: 4.1522,  AvgTime: 1.58ms
+Step: 6000,  Epoch: 11,  Batch: 500 of 550,  Cost: 4.5027,  AvgTime: 1.54ms
+Step: 6050,  Epoch: 11,  Batch: 550 of 550,  Cost: 4.4506,  AvgTime: 0.78ms
+Step: 6150,  Epoch: 12,  Batch: 100 of 550,  Cost: 4.6510,  AvgTime: 2.42ms
+Step: 6250,  Epoch: 12,  Batch: 200 of 550,  Cost: 4.5222,  AvgTime: 1.58ms
+Step: 6350,  Epoch: 12,  Batch: 300 of 550,  Cost: 4.3029,  AvgTime: 1.53ms
+Step: 6450,  Epoch: 12,  Batch: 400 of 550,  Cost: 3.7654,  AvgTime: 1.56ms
+Step: 6550,  Epoch: 12,  Batch: 500 of 550,  Cost: 3.8561,  AvgTime: 1.59ms
+Step: 6600,  Epoch: 12,  Batch: 550 of 550,  Cost: 3.6839,  AvgTime: 0.78ms
+Step: 6700,  Epoch: 13,  Batch: 100 of 550,  Cost: 4.5300,  AvgTime: 2.51ms
+Step: 6800,  Epoch: 13,  Batch: 200 of 550,  Cost: 4.1073,  AvgTime: 1.59ms
+Step: 6900,  Epoch: 13,  Batch: 300 of 550,  Cost: 4.5617,  AvgTime: 1.65ms
+Step: 7000,  Epoch: 13,  Batch: 400 of 550,  Cost: 4.1886,  AvgTime: 1.55ms
+Step: 7100,  Epoch: 13,  Batch: 500 of 550,  Cost: 3.6407,  AvgTime: 1.58ms
+Step: 7150,  Epoch: 13,  Batch: 550 of 550,  Cost: 3.6127,  AvgTime: 0.77ms
+Step: 7250,  Epoch: 14,  Batch: 100 of 550,  Cost: 4.6530,  AvgTime: 2.51ms
+Step: 7350,  Epoch: 14,  Batch: 200 of 550,  Cost: 4.6424,  AvgTime: 1.53ms
+Step: 7450,  Epoch: 14,  Batch: 300 of 550,  Cost: 4.0513,  AvgTime: 1.58ms
+Step: 7550,  Epoch: 14,  Batch: 400 of 550,  Cost: 4.2051,  AvgTime: 1.66ms
+Step: 7650,  Epoch: 14,  Batch: 500 of 550,  Cost: 4.0347,  AvgTime: 1.57ms
+Step: 7700,  Epoch: 14,  Batch: 550 of 550,  Cost: 4.1634,  AvgTime: 0.79ms
+Step: 7800,  Epoch: 15,  Batch: 100 of 550,  Cost: 4.8146,  AvgTime: 2.40ms
+Step: 7900,  Epoch: 15,  Batch: 200 of 550,  Cost: 3.7885,  AvgTime: 1.61ms
+Step: 8000,  Epoch: 15,  Batch: 300 of 550,  Cost: 4.4222,  AvgTime: 1.60ms
+Step: 8100,  Epoch: 15,  Batch: 400 of 550,  Cost: 4.6553,  AvgTime: 1.55ms
+Step: 8200,  Epoch: 15,  Batch: 500 of 550,  Cost: 4.6045,  AvgTime: 1.58ms
+Step: 8250,  Epoch: 15,  Batch: 550 of 550,  Cost: 4.0090,  AvgTime: 0.78ms
+Step: 8350,  Epoch: 16,  Batch: 100 of 550,  Cost: 3.7010,  AvgTime: 2.40ms
+Step: 8450,  Epoch: 16,  Batch: 200 of 550,  Cost: 3.9292,  AvgTime: 1.56ms
+Step: 8550,  Epoch: 16,  Batch: 300 of 550,  Cost: 4.2164,  AvgTime: 1.54ms
+Step: 8650,  Epoch: 16,  Batch: 400 of 550,  Cost: 4.2850,  AvgTime: 1.59ms
+Step: 8750,  Epoch: 16,  Batch: 500 of 550,  Cost: 4.2003,  AvgTime: 1.56ms
+Step: 8800,  Epoch: 16,  Batch: 550 of 550,  Cost: 3.6518,  AvgTime: 0.79ms
+Step: 8900,  Epoch: 17,  Batch: 100 of 550,  Cost: 3.5645,  AvgTime: 2.44ms
+Step: 9000,  Epoch: 17,  Batch: 200 of 550,  Cost: 4.0887,  AvgTime: 1.54ms
+Step: 9100,  Epoch: 17,  Batch: 300 of 550,  Cost: 3.4536,  AvgTime: 1.57ms
+Step: 9200,  Epoch: 17,  Batch: 400 of 550,  Cost: 3.8856,  AvgTime: 1.58ms
+Step: 9300,  Epoch: 17,  Batch: 500 of 550,  Cost: 4.0322,  AvgTime: 1.54ms
+Step: 9350,  Epoch: 17,  Batch: 550 of 550,  Cost: 3.0166,  AvgTime: 0.82ms
+Step: 9450,  Epoch: 18,  Batch: 100 of 550,  Cost: 3.4429,  AvgTime: 2.45ms
+Step: 9550,  Epoch: 18,  Batch: 200 of 550,  Cost: 3.6629,  AvgTime: 1.55ms
+Step: 9650,  Epoch: 18,  Batch: 300 of 550,  Cost: 3.7198,  AvgTime: 1.57ms
+Step: 9750,  Epoch: 18,  Batch: 400 of 550,  Cost: 3.8597,  AvgTime: 1.58ms
+Step: 9850,  Epoch: 18,  Batch: 500 of 550,  Cost: 3.6027,  AvgTime: 1.59ms
+Step: 9900,  Epoch: 18,  Batch: 550 of 550,  Cost: 3.4088,  AvgTime: 0.77ms
+Step: 10000,  Epoch: 19,  Batch: 100 of 550,  Cost: 3.5492,  AvgTime: 2.42ms
+Step: 10100,  Epoch: 19,  Batch: 200 of 550,  Cost: 3.3042,  AvgTime: 1.57ms
+Step: 10200,  Epoch: 19,  Batch: 300 of 550,  Cost: 4.0732,  AvgTime: 1.56ms
+Step: 10300,  Epoch: 19,  Batch: 400 of 550,  Cost: 3.4309,  AvgTime: 1.55ms
+Step: 10400,  Epoch: 19,  Batch: 500 of 550,  Cost: 4.2299,  AvgTime: 1.60ms
+Step: 10450,  Epoch: 19,  Batch: 550 of 550,  Cost: 3.6038,  AvgTime: 0.78ms
+Step: 10550,  Epoch: 20,  Batch: 100 of 550,  Cost: 3.6821,  AvgTime: 2.46ms
+Step: 10650,  Epoch: 20,  Batch: 200 of 550,  Cost: 3.6741,  AvgTime: 1.61ms
+Step: 10750,  Epoch: 20,  Batch: 300 of 550,  Cost: 3.2837,  AvgTime: 1.58ms
+Step: 10850,  Epoch: 20,  Batch: 400 of 550,  Cost: 3.5762,  AvgTime: 1.57ms
+Step: 10950,  Epoch: 20,  Batch: 500 of 550,  Cost: 3.1654,  AvgTime: 1.58ms
+Step: 11000,  Epoch: 20,  Batch: 550 of 550,  Cost: 3.9488,  AvgTime: 0.76ms
+Test-Accuracy: 0.28
+Total Time: 19.66s
+Final Cost: 3.9488
+done
+```
