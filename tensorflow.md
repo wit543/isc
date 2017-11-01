@@ -227,6 +227,7 @@ tensorflow/tools/docker/parameterized_docker_build.sh
 docker run -p 8890:8888 --name w1 -it boss/test:latest bash
 docker run -p 2222:2222 --name w1 -it boss/tensor:lastest bash
 python3 isac.py --job_name="ps" --task_index=0
+python3 isac.py --job_name="worker" --task_index=0
 ```
 ## Result
 
