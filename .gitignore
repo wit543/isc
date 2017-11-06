@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/inspectionProfiles/
 .vscode/
+.idea
+.idea/workspace.xml
