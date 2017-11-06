@@ -42,11 +42,6 @@ import time
 from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
 
-tf.app.flags.DEFINE_string("job_name", "", "Either 'ps' or 'worker'")
-tf.app.flags.DEFINE_integer("task_index", 0, "Index of task within the job")
-
-
-
 def print_activations(t):
     print(t.op.name, ' ', t.get_shape().as_list())
 
