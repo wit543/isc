@@ -184,7 +184,7 @@ def inference(images):
                                    padding='VALID',
                                    name='pool5')
             print_activations(pool5)
-    return pool5, parameters
+            return pool5, parameters
 
 
 def time_tensorflow_run(session, target, info_string):
