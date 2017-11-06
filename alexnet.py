@@ -57,10 +57,10 @@ def inference(images):
     parameters: a list of Tensors corresponding to the weights and biases of the
         AlexNet model.
   """
-    parameter_servers = ["172.17.0.6:2222"]
-    workers = ["172.17.0.7:2222",
-               "172.17.0.8:2222",
-               "172.17.0.9:2222"]
+    parameter_servers = ["172.17.0.2:2222"]
+    workers = ["172.17.0.3:2222",
+               "172.17.0.4:2222",
+               "172.17.0.5:2222"]
     cluster = tf.train.ClusterSpec({"ps": parameter_servers, "worker": workers})
     # start a server for a specific task
     server = tf.train.Server(
