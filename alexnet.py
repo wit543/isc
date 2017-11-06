@@ -238,8 +238,16 @@ def run_benchmark():
                 # Start running operations on the Graph.
                 config = tf.ConfigProto()
                 config.gpu_options.allocator_type = 'BFC'
-
-                sess = tf.Session(config=config)
+                with tf.train.MonitoredTrainingSession(master=server.target,
+                                                       is_chief=(FLAGS.task_index == 0),
+                                                       checkpoint_dir="/tmp/train_logs",
+                                                       hooks=hooks) as mon_sess:
+                    while not mon_sess.should_stop():
+                        # Run a training step asynchronously.
+                        # See `tf.train.SyncReplicasOptimizer` for additional details on how to
+                        # perform *synchronous* training.
+                        # mon_sess.run handles AbortedError in case of preempted PS.
+                        mon_sess.run(init)
                 sess.run(init)
 
                 # Run the forward benchmark.

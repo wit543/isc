@@ -1,7 +1,9 @@
 import datetime
-
+import alexnet
 import tensorflow as tf
-
+BATCH_SIZE = 10
+NUM_LABELS = 10
+LEARNING_RATE = .02
 # input flags
 tf.app.flags.DEFINE_string("job_name", "", "Either 'ps' or 'worker'")
 tf.app.flags.DEFINE_integer("task_index", 0, "Index of task within the job")
@@ -84,11 +86,11 @@ elif FLAGS.job_name == "worker":
         while step <= 40000:
 
             print('Iteration %d' % step)
-            sys.stdout.flush()
+            tf.sys.stdout.flush()
             batch_xs, batch_ys = get_data(BATCH_SIZE)
             train_feed = {x: batch_xs, y_: batch_ys}
 
-            start_time = time.time()
+            start_time = datetime.time()
 
             _, step = sess.run([train_op, global_step], feed_dict=train_feed)
 
@@ -103,5 +105,5 @@ elif FLAGS.job_name == "worker":
                     print('%s: step %d, images processed: %d, images per second: %.3f, time taken: %.2f' %
                           (datetime.now(), iterations, images_processed, images_processed / total_duration,
                            total_duration))
-                    sys.stdout.flush()
+                    tf.sys.stdout.flush()
     sv.stop()
