@@ -222,8 +222,6 @@ def run_benchmark():
                 worker_device="/job:worker/task:%d" % FLAGS.task_index,
                 # worker_device='/gpu:%d' % gpu,
                 cluster=cluster)):
-
-            summary_op = tf.merge_all_summaries()
             with tf.Graph().as_default():
                 # Generate some dummy images.
                 image_size = 224
