@@ -216,41 +216,40 @@ def time_tensorflow_run(session, target, info_string):
 
 def run_benchmark():
     """Run the benchmark on AlexNet."""
-    with tf.Graph().as_default():
-        # Generate some dummy images.
-        image_size = 224
-        # Note that our padding definition is slightly different the cuda-convnet.
-        # In order to force the model to start with the same activations sizes,
-        # we add 3 to the image_size and employ VALID padding above.
-        images = tf.Variable(tf.random_normal([FLAGS.batch_size,
-                                               image_size,
-                                               image_size, 3],
-                                              dtype=tf.float32,
-                                              stddev=1e-1))
+    # Generate some dummy images.
+    image_size = 224
+    # Note that our padding definition is slightly different the cuda-convnet.
+    # In order to force the model to start with the same activations sizes,
+    # we add 3 to the image_size and employ VALID padding above.
+    images = tf.Variable(tf.random_normal([FLAGS.batch_size,
+                                           image_size,
+                                           image_size, 3],
+                                          dtype=tf.float32,
+                                          stddev=1e-1))
 
-        # Build a Graph that computes the logits predictions from the
-        # inference model.
-        pool5, parameters = inference(images)
+    # Build a Graph that computes the logits predictions from the
+    # inference model.
+    pool5, parameters = inference(images)
 
-        # Build an initialization operation.
-        init = tf.global_variables_initializer()
+    # Build an initialization operation.
+    init = tf.global_variables_initializer()
 
-        # Start running operations on the Graph.
-        config = tf.ConfigProto()
-        config.gpu_options.allocator_type = 'BFC'
+    # Start running operations on the Graph.
+    config = tf.ConfigProto()
+    config.gpu_options.allocator_type = 'BFC'
 
-        sess = tf.Session(config=config)
-        sess.run(init)
+    sess = tf.Session(config=config)
+    sess.run(init)
 
-        # Run the forward benchmark.
-        time_tensorflow_run(sess, pool5, "Forward")
+    # Run the forward benchmark.
+    time_tensorflow_run(sess, pool5, "Forward")
 
-        # Add a simple objective so we can calculate the backward pass.
-        objective = tf.nn.l2_loss(pool5)
-        # Compute the gradient with respect to all the parameters.
-        grad = tf.gradients(objective, parameters)
-        # Run the backward benchmark.
-        time_tensorflow_run(sess, grad, "Forward-backward")
+    # Add a simple objective so we can calculate the backward pass.
+    objective = tf.nn.l2_loss(pool5)
+    # Compute the gradient with respect to all the parameters.
+    grad = tf.gradients(objective, parameters)
+    # Run the backward benchmark.
+    time_tensorflow_run(sess, grad, "Forward-backward")
 
 
 def main(_):
