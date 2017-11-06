@@ -52,7 +52,7 @@ elif FLAGS.job_name == "worker":
         chief_queue_runner = sync_rep_opt.get_chief_queue_runner()
 
         # saver = tf.train.Saver()
-        summary_op = tf.merge_all_summaries()
+        summary_op = tf.summary.merge_all()
 
         init_op = tf.initialize_all_variables()
         saver = tf.train.Saver()
@@ -92,7 +92,7 @@ elif FLAGS.job_name == "worker":
 
             _, step = sess.run([train_op, global_step], feed_dict=train_feed)
 
-            duration = time.time() - start_time
+            duration = datetime.time() - start_time
             if step > num_steps_burn_in:
                 total_duration += duration
                 total_duration_squared += duration * duration

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="67a76ea1-d655-4a22-8f3c-79cd69725f7a" name="Default" comment="" />
+    <list default="true" id="67a76ea1-d655-4a22-8f3c-79cd69725f7a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alexnet.py" afterPath="$PROJECT_DIR$/alexnet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/naveen.py" afterPath="$PROJECT_DIR$/naveen.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +17,7 @@
       <file leaf-file-name="dist_mnist_split_graph.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist_mnist_split_graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="25">
               <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="22" />
               <folding />
             </state>
@@ -24,21 +27,48 @@
       <file leaf-file-name="dist_mnist.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist_mnist.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="31" selection-end-column="26" />
+            <state relative-caret-position="50">
+              <caret line="132" column="6" lean-forward="false" selection-start-line="132" selection-start-column="4" selection-end-line="132" selection-end-column="6" />
               <folding>
                 <element signature="e#564#601#0" expanded="true" />
+                <element signature="e#1730#4671#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="alexnet.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="docker.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docker.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="0">
+                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alexnet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alexnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="223" column="34" lean-forward="false" selection-start-line="223" selection-start-column="34" selection-end-line="223" selection-end-column="34" />
+            <state relative-caret-position="-312">
+              <caret line="204" column="35" lean-forward="false" selection-start-line="204" selection-start-column="30" selection-end-line="204" selection-end-column="35" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alexnet.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alexnet.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="0">
+                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -46,8 +76,8 @@
       <file leaf-file-name="naveen.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/naveen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1305">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="32" selection-end-column="45" />
+            <state relative-caret-position="245">
+              <caret line="87" column="52" lean-forward="false" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="52" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -78,7 +108,7 @@
       <file leaf-file-name="dist_mist.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist_mist.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-2775">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -98,6 +128,8 @@
     <findStrings>
       <find>inference</find>
       <find>GradientDescentOptimizer</find>
+      <find>ses</find>
+      <find>batch</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -107,8 +139,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dist_mnist.py" />
-        <option value="$PROJECT_DIR$/naveen.py" />
         <option value="$PROJECT_DIR$/alexnet.py" />
+        <option value="$PROJECT_DIR$/naveen.py" />
       </list>
     </option>
   </component>
@@ -252,6 +284,7 @@
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="31" selection-end-column="26" />
           <folding>
             <element signature="e#564#601#0" expanded="true" />
+            <element signature="e#1730#4671#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -290,28 +323,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist_mnist_split_graph.py">
+    <entry file="file://$PROJECT_DIR$/dist_mist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="-2775">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dist_mnist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="31" selection-end-column="26" />
+        <state relative-caret-position="50">
+          <caret line="132" column="6" lean-forward="false" selection-start-line="132" selection-start-column="4" selection-end-line="132" selection-end-column="6" />
           <folding>
             <element signature="e#564#601#0" expanded="true" />
+            <element signature="e#1730#4671#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist_mist.py">
+    <entry file="file://$PROJECT_DIR$/dist_mnist_split_graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="25">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -324,29 +366,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/docker.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/naveen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1305">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="32" selection-end-column="45" />
+        <state relative-caret-position="245">
+          <caret line="87" column="52" lean-forward="false" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="52" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/alexnet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-312">
+          <caret line="204" column="35" lean-forward="false" selection-start-line="204" selection-start-column="30" selection-end-line="204" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alexnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="223" column="34" lean-forward="false" selection-start-line="223" selection-start-column="34" selection-end-line="223" selection-end-column="34" />
-          <folding />
+    <entry file="file://$PROJECT_DIR$/alexnet.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
