@@ -238,6 +238,7 @@ def run_benchmark():
                 # Start running operations on the Graph.
                 config = tf.ConfigProto()
                 config.gpu_options.allocator_type = 'BFC'
+                hooks = [tf.train.StopAtStepHook(last_step=1000000)]
                 with tf.train.MonitoredTrainingSession(master=server.target,
                                                        is_chief=(FLAGS.task_index == 0),
                                                        checkpoint_dir="/tmp/train_logs",
