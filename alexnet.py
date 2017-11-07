@@ -142,6 +142,7 @@ def inference(images):
 
     # conv5
     with tf.name_scope('conv5') as scope:
+        global_step = tf.contrib.framework.get_or_create_global_step()
         kernel = tf.Variable(tf.truncated_normal([3, 3, 256, 256],
                                                  dtype=tf.float32,
                                                  stddev=1e-1), name='weights')
@@ -231,33 +232,37 @@ def run_benchmark():
                 # Build a Graph that computes the logits predictions from the
                 # inference model.
                 pool5, parameters = inference(images)
-                global_step = tf.contrib.framework.get_or_create_global_step()
+
                 # Build an initialization operation.
                 init = tf.global_variables_initializer()
 
-        # Start running operations on the Graph.
-        config = tf.ConfigProto()
-        config.gpu_options.allocator_type = 'BFC'
-        hooks = [tf.train.StopAtStepHook(last_step=1000000)]
-        with tf.train.MonitoredTrainingSession(master=server.target,
-                                               is_chief=(FLAGS.task_index == 0),
-                                               checkpoint_dir="/tmp/train_logs",
-                                               hooks=hooks) as mon_sess:
-            while not mon_sess.should_stop():
-                # Run a training step asynchronously.
-                # See `tf.train.SyncReplicasOptimizer` for additional details on how to
-                # perform *synchronous* training.
-                # mon_sess.run handles AbortedError in case of preempted PS.
-                mon_sess.run(init)
-                # Run the forward benchmark.
-                time_tensorflow_run(sess, pool5, "Forward")
+                # Start running operations on the Graph.
+                config = tf.ConfigProto()
+                config.gpu_options.allocator_type = 'BFC'
 
-                # Add a simple objective so we can calculate the backward pass.
-                objective = tf.nn.l2_loss(pool5)
-                # Compute the gradient with respect to all the parameters.
-                grad = tf.gradients(objective, parameters)
-                # Run the backward benchmark.
-                time_tensorflow_run(sess, grad, "Forward-backward")
+                sess = tf.Session(config=config)
+
+                # The StopAtStepHook handles stopping after running given steps.
+                hooks = [tf.train.StopAtStepHook(last_step=1000000)]
+
+                # The MonitoredTrainingSession takes care of session initialization,
+                # restoring from a checkpoint, saving to a checkpoint, and closing when done
+                # or an error occurs.
+                with tf.train.MonitoredTrainingSession(master=server.target,
+                                                       is_chief=(FLAGS.task_index == 0),
+                                                       checkpoint_dir="/tmp/train_logs",
+                                                           hooks=hooks) as sess:
+                    sess.run(init)
+
+                    # Run the forward benchmark.
+                    time_tensorflow_run(sess, pool5, "Forward")
+
+                    # Add a simple objective so we can calculate the backward pass.
+                    objective = tf.nn.l2_loss(pool5)
+                    # Compute the gradient with respect to all the parameters.
+                    grad = tf.gradients(objective, parameters)
+                    # Run the backward benchmark.
+                    time_tensorflow_run(sess, grad, "Forward-backward")
 
 
 def main(_):
