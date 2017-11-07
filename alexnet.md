@@ -245,6 +245,25 @@ pool5   [128, 6, 6, 256]
 
 ## Modified (add 10 layer)
 
+layer
+```bash
+            net = slim.max_pool2d(net, [3, 3], 2, scope='pool1')
+            net = slim.conv2d(net, 192, [5, 5], scope='conv2')
+            net = slim.max_pool2d(net, [3, 3], 2, scope='pool2')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.1')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.2')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.3')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.4')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.5')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.6')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.7')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.8')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.9')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4')
+            net = slim.conv2d(net, 256, [3, 3], scope='conv5')
+            net = slim.max_pool2d(net, [3, 3], 2, scope='pool5')
+```
 ### distributed
 ps 1
 ```bash
@@ -743,3 +762,35 @@ E1107 08:46:58.607474828    6866 ev_epoll1_linux.c:1051]     grpc epoll fd: 19
 2017-11-07 08:47:33.070072: step 990, duration = 0.033
 2017-11-07 08:47:33.366015: across 1000 steps, 0.034 +/- 0.023 sec / batch
 ```
+
+layer
+
+```bash
+            net = slim.conv2d(inputs, 64, [11, 11], 4, padding='VALID',
+                              scope='conv1')
+            net = slim.max_pool2d(net, [3, 3], 2, scope='pool1')
+            net = slim.conv2d(net, 192, [5, 5], scope='conv2')
+            net = slim.max_pool2d(net, [3, 3], 2, scope='pool2')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.1')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.2')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.3')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.4')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.5')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.6')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.7')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.8')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv3.9')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.1')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.2')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.3')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.4')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.5')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.6')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.7')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.8')
+            net = slim.conv2d(net, 384, [3, 3], scope='conv4.9')
+            net = slim.conv2d(net, 256, [3, 3], scope='conv5')
+            net = slim.max_pool2d(net, [3, 3], 2, scope='pool5')
+            ```
