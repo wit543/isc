@@ -61,7 +61,6 @@ def alexnet_v2(inputs,
             net = slim.conv2d(net, 384, [3, 3], scope='conv3.7')
             net = slim.conv2d(net, 384, [3, 3], scope='conv3.8')
             net = slim.conv2d(net, 384, [3, 3], scope='conv3.9')
-            net = slim.max_pool2d(net, [3, 3], 2, scope='pool3')
             net = slim.conv2d(net, 384, [3, 3], scope='conv4')
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.1')
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.2')
@@ -72,7 +71,6 @@ def alexnet_v2(inputs,
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.7')
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.8')
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.9')
-            net = slim.max_pool2d(net, [3, 3], 2, scope='pool4')
             net = slim.conv2d(net, 256, [3, 3], scope='conv5')
             net = slim.max_pool2d(net, [3, 3], 2, scope='pool5')
 
