@@ -128,7 +128,7 @@ def main(_):
                 total_duration_squared += duration * duration
             mn = total_duration / FLAGS.num_batches
             vr = total_duration_squared / FLAGS.num_batches - mn * mn
-            sd = math.sqrt(vr)
+            sd = math.sqrt(abs(vr))
             print('%s: across %d steps, %.3f +/- %.3f sec / batch' % (datetime.now(), FLAGS.num_batches, mn, sd))
 
         # Stop TensorFlow Session
