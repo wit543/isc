@@ -104,7 +104,7 @@ def main(_):
             with slim.arg_scope(alexnet_v2_arg_scope()):
                 logits, end_points = alexnet_v2(images, is_training=False)
             saver = tf.train.Saver()
-            summary_op = tf.merge_all_summaries()
+            summary_op = tf.summary.merge_all()
             # summary_op = tf.summary.merge_all()
             init_op = tf.global_variables_initializer()
 
