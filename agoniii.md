@@ -1177,4 +1177,259 @@ layer
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.9')
             net = slim.conv2d(net, 256, [3, 3], scope='conv5')
             net = slim.max_pool2d(net, [3, 3], 2, scope='pool5')
-            ```
+```
+ps 1
+```bash
+root@a22e6717d336:~/isc# python3 agoniii.py --ps_host 172.17.0.2:2222 --worker_hosts 172.17.0.3:2222,172.17.0.4:2222,172.17.0.5:2222 --job_name ps --task_index 0 --batch_size 10 --num_batches 1000
+2017-11-07 13:04:12.440354: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-07 13:04:12.445034: E tensorflow/stream_executor/cuda/cuda_driver.cc:406] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+2017-11-07 13:04:12.445147: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:158] retrieving CUDA diagnostic information for host: a22e6717d336
+2017-11-07 13:04:12.445192: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:165] hostname: a22e6717d336
+2017-11-07 13:04:12.445276: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:189] libcuda reported version is: 384.81.0
+2017-11-07 13:04:12.445337: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:369] driver version file contents: """NVRM version: NVIDIA UNIX x86_64 Kernel Module  384.81  Sat Sep  2 02:43:11 PDT 2017
+GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) 
+"""
+2017-11-07 13:04:12.445373: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:193] kernel reported version is: 384.81.0
+2017-11-07 13:04:12.445391: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:300] kernel version seems to match DSO: 384.81.0
+E1107 13:04:12.445698457     800 ev_epoll1_linux.c:1051]     grpc epoll fd: 3
+2017-11-07 13:04:12.452421: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job ps -> {0 -> localhost:2222}
+2017-11-07 13:04:12.452505: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> 172.17.0.3:2222, 1 -> 172.17.0.4:2222, 2 -> 172.17.0.5:2222}
+2017-11-07 13:04:12.453196: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+```
+worker 1
+
+```bash
+root@98154222840c:~/isc# python3 agoniii.py --ps_host 172.17.0.2:2222 --worker_hosts 172.17.0.3:2222,172.17.0.4:2222,172.17.0.5:2222 --job_name worker --task_index 0 --batch_size 10 --num_batches 1000
+2017-11-07 13:04:47.700030: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-07 13:04:47.801975: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:892] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2017-11-07 13:04:47.802473: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: Tesla K40c major: 3 minor: 5 memoryClockRate(GHz): 0.745
+pciBusID: 0000:01:00.0
+totalMemory: 11.17GiB freeMemory: 11.09GiB
+2017-11-07 13:04:47.802519: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K40c, pci bus id: 0000:01:00.0, compute capability: 3.5)
+E1107 13:04:47.858900058    8291 ev_epoll1_linux.c:1051]     grpc epoll fd: 19
+2017-11-07 13:04:47.865615: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job ps -> {0 -> 172.17.0.2:2222}
+2017-11-07 13:04:47.865721: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> localhost:2222, 1 -> 172.17.0.4:2222, 2 -> 172.17.0.5:2222}
+2017-11-07 13:04:47.866481: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+2017-11-07 13:04:58.438432: I tensorflow/core/distributed_runtime/master.cc:221] CreateSession still waiting for response from worker: /job:worker/replica:0/task:2
+2017-11-07 13:05:03.454152: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 2feaff26548834a9 with config: 
+2017-11-07 13:05:08.958645: step 0, duration = 0.292
+2017-11-07 13:05:11.971562: step 10, duration = 0.309
+2017-11-07 13:05:14.951934: step 20, duration = 0.297
+2017-11-07 13:05:17.941937: step 30, duration = 0.307
+2017-11-07 13:05:20.934862: step 40, duration = 0.314
+2017-11-07 13:05:23.984735: step 50, duration = 0.310
+2017-11-07 13:05:26.989820: step 60, duration = 0.303
+2017-11-07 13:05:29.952667: step 70, duration = 0.302
+2017-11-07 13:05:32.965805: step 80, duration = 0.290
+2017-11-07 13:05:36.864096: step 90, duration = 0.462
+2017-11-07 13:05:41.441015: step 100, duration = 0.500
+2017-11-07 13:05:46.001447: step 110, duration = 0.453
+2017-11-07 13:05:50.435335: step 120, duration = 0.420
+2017-11-07 13:05:54.980404: step 130, duration = 0.497
+2017-11-07 13:05:59.547468: step 140, duration = 0.428
+2017-11-07 13:06:04.083728: step 150, duration = 0.462
+2017-11-07 13:06:08.703175: step 160, duration = 0.464
+2017-11-07 13:06:13.246629: step 170, duration = 0.407
+2017-11-07 13:06:17.724530: step 180, duration = 0.480
+2017-11-07 13:06:22.442785: step 190, duration = 0.511
+2017-11-07 13:06:26.772952: step 200, duration = 0.392
+2017-11-07 13:06:31.431380: step 210, duration = 0.454
+2017-11-07 13:06:35.921232: step 220, duration = 0.490
+2017-11-07 13:06:40.535504: step 230, duration = 0.431
+2017-11-07 13:06:45.265232: step 240, duration = 0.552
+2017-11-07 13:06:49.711251: step 250, duration = 0.413
+2017-11-07 13:06:54.420100: step 260, duration = 0.470
+2017-11-07 13:06:58.846439: step 270, duration = 0.478
+2017-11-07 13:07:03.346875: step 280, duration = 0.462
+2017-11-07 13:07:07.903425: step 290, duration = 0.377
+2017-11-07 13:07:12.548440: step 300, duration = 0.439
+2017-11-07 13:07:17.050298: step 310, duration = 0.479
+2017-11-07 13:07:21.628406: step 320, duration = 0.414
+2017-11-07 13:07:26.273203: step 330, duration = 0.453
+2017-11-07 13:07:30.874200: step 340, duration = 0.430
+2017-11-07 13:07:35.371185: step 350, duration = 0.522
+2017-11-07 13:07:39.805255: step 360, duration = 0.431
+2017-11-07 13:07:44.310039: step 370, duration = 0.433
+2017-11-07 13:07:49.041209: step 380, duration = 0.486
+2017-11-07 13:07:53.523348: step 390, duration = 0.451
+2017-11-07 13:07:58.143084: step 400, duration = 0.437
+2017-11-07 13:08:02.671833: step 410, duration = 0.415
+2017-11-07 13:08:07.132410: step 420, duration = 0.436
+2017-11-07 13:08:11.629845: step 430, duration = 0.493
+2017-11-07 13:08:16.076457: step 440, duration = 0.406
+2017-11-07 13:08:20.631470: step 450, duration = 0.530
+2017-11-07 13:08:25.241028: step 460, duration = 0.480
+2017-11-07 13:08:29.679406: step 470, duration = 0.464
+2017-11-07 13:08:34.035209: step 480, duration = 0.516
+2017-11-07 13:08:38.660659: step 490, duration = 0.509
+2017-11-07 13:08:43.262597: step 500, duration = 0.498
+2017-11-07 13:08:47.873485: step 510, duration = 0.476
+2017-11-07 13:08:52.383652: step 520, duration = 0.405
+2017-11-07 13:08:56.823490: step 530, duration = 0.441
+2017-11-07 13:09:01.585517: step 540, duration = 0.531
+2017-11-07 13:09:05.962647: step 550, duration = 0.413
+2017-11-07 13:09:10.524571: step 560, duration = 0.530
+2017-11-07 13:09:14.965630: step 570, duration = 0.487
+2017-11-07 13:09:19.415829: step 580, duration = 0.453
+2017-11-07 13:09:23.952850: step 590, duration = 0.460
+2017-11-07 13:09:28.559258: step 600, duration = 0.453
+2017-11-07 13:09:32.999964: step 610, duration = 0.420
+2017-11-07 13:09:37.392519: step 620, duration = 0.474
+2017-11-07 13:09:41.906558: step 630, duration = 0.431
+2017-11-07 13:09:46.391129: step 640, duration = 0.420
+2017-11-07 13:09:51.229430: step 650, duration = 0.548
+2017-11-07 13:09:55.836671: step 660, duration = 0.431
+2017-11-07 13:10:00.485367: step 670, duration = 0.461
+2017-11-07 13:10:05.090507: step 680, duration = 0.438
+2017-11-07 13:10:09.708710: step 690, duration = 0.453
+2017-11-07 13:10:14.334629: step 700, duration = 0.506
+2017-11-07 13:10:18.744600: step 710, duration = 0.415
+2017-11-07 13:10:23.227688: step 720, duration = 0.456
+2017-11-07 13:10:27.764486: step 730, duration = 0.450
+2017-11-07 13:10:32.345194: step 740, duration = 0.428
+2017-11-07 13:10:36.881633: step 750, duration = 0.424
+2017-11-07 13:10:41.188419: step 760, duration = 0.419
+2017-11-07 13:10:45.678870: step 770, duration = 0.459
+2017-11-07 13:10:50.153654: step 780, duration = 0.516
+2017-11-07 13:10:54.563115: step 790, duration = 0.387
+2017-11-07 13:10:58.957012: step 800, duration = 0.435
+2017-11-07 13:11:03.461893: step 810, duration = 0.475
+2017-11-07 13:11:08.366778: step 820, duration = 0.505
+2017-11-07 13:11:12.811543: step 830, duration = 0.455
+2017-11-07 13:11:17.420042: step 840, duration = 0.468
+2017-11-07 13:11:21.860694: step 850, duration = 0.423
+2017-11-07 13:11:26.167627: step 860, duration = 0.409
+2017-11-07 13:11:30.821184: step 870, duration = 0.539
+2017-11-07 13:11:35.250039: step 880, duration = 0.438
+2017-11-07 13:11:39.640401: step 890, duration = 0.390
+2017-11-07 13:11:44.009820: step 900, duration = 0.405
+2017-11-07 13:11:48.575353: step 910, duration = 0.396
+2017-11-07 13:11:53.154516: step 920, duration = 0.443
+2017-11-07 13:11:57.825286: step 930, duration = 0.513
+2017-11-07 13:12:02.431169: step 940, duration = 0.394
+2017-11-07 13:12:07.161598: step 950, duration = 0.468
+2017-11-07 13:12:11.752685: step 960, duration = 0.419
+2017-11-07 13:12:16.278030: step 970, duration = 0.500
+2017-11-07 13:12:20.755332: step 980, duration = 0.426
+2017-11-07 13:12:25.336761: step 990, duration = 0.422
+2017-11-07 13:12:29.353180: across 1000 steps, 0.445 +/- 0.049 sec / batch
+```
+
+worker 1
+```bash
+
+root@610546c83414:~/isc# python3 agoniii.py --ps_host 172.17.0.2:2222 --worker_hosts 172.17.0.3:2222,172.17.0.4:2222,172.17.0.5:2222 --job_name worker --task_index 1 --batch_size 10 --num_batches 1000
+2017-11-07 13:04:19.101113: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-07 13:04:19.105215: E tensorflow/stream_executor/cuda/cuda_driver.cc:406] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+2017-11-07 13:04:19.105276: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:158] retrieving CUDA diagnostic information for host: 610546c83414
+2017-11-07 13:04:19.105300: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:165] hostname: 610546c83414
+2017-11-07 13:04:19.105356: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:189] libcuda reported version is: 384.81.0
+2017-11-07 13:04:19.105394: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:369] driver version file contents: """NVRM version: NVIDIA UNIX x86_64 Kernel Module  384.81  Sat Sep  2 02:43:11 PDT 2017
+GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) 
+"""
+2017-11-07 13:04:19.105434: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:193] kernel reported version is: 384.81.0
+2017-11-07 13:04:19.105459: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:300] kernel version seems to match DSO: 384.81.0
+E1107 13:04:19.105617809    3474 ev_epoll1_linux.c:1051]     grpc epoll fd: 3
+2017-11-07 13:04:19.111887: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job ps -> {0 -> 172.17.0.2:2222}
+2017-11-07 13:04:19.111978: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> 172.17.0.3:2222, 1 -> localhost:2222, 2 -> 172.17.0.5:2222}
+2017-11-07 13:04:19.112734: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+2017-11-07 13:04:21.680791: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 34bc1dbe415cf1ff with config: 
+2017-11-07 13:05:03.879880: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 303869706eebf146 with config: 
+2017-11-07 13:05:34.178231: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session d8a4b1db5b8cd3d7 with config: 
+2017-11-07 13:06:10.643410: step 0, duration = 3.291
+2017-11-07 13:06:43.809373: step 10, duration = 3.216
+2017-11-07 13:07:16.816275: step 20, duration = 3.388
+2017-11-07 13:07:50.280413: step 30, duration = 3.363
+2017-11-07 13:08:23.685942: step 40, duration = 3.490
+2017-11-07 13:08:56.652708: step 50, duration = 3.391
+2017-11-07 13:09:29.859608: step 60, duration = 3.301
+2017-11-07 13:10:02.879244: step 70, duration = 3.311
+2017-11-07 13:10:35.989501: step 80, duration = 3.309
+2017-11-07 13:11:09.625512: step 90, duration = 3.266
+2017-11-07 13:11:43.113206: step 100, duration = 3.291
+2017-11-07 13:12:15.984319: step 110, duration = 3.214
+2017-11-07 13:12:42.459390: step 120, duration = 2.138
+2017-11-07 13:13:04.522672: step 130, duration = 2.251
+2017-11-07 13:13:26.477251: step 140, duration = 2.208
+2017-11-07 13:13:48.721204: step 150, duration = 2.240
+2017-11-07 13:14:10.562729: step 160, duration = 2.252
+2017-11-07 13:14:32.848344: step 170, duration = 2.193
+2017-11-07 13:14:55.100585: step 180, duration = 2.196
+2017-11-07 13:15:17.338481: step 190, duration = 2.230
+2017-11-07 13:15:39.944028: step 200, duration = 2.224
+2017-11-07 13:16:02.387938: step 210, duration = 2.236
+2017-11-07 13:16:24.817251: step 220, duration = 2.127
+2017-11-07 13:16:47.197201: step 230, duration = 2.256
+2017-11-07 13:17:09.148537: step 240, duration = 2.143
+2017-11-07 13:17:31.443129: step 250, duration = 2.207
+2017-11-07 13:17:53.396520: step 260, duration = 2.223
+2017-11-07 13:18:15.350206: step 270, duration = 2.161
+2017-11-07 13:18:37.409207: step 280, duration = 2.201
+2017-11-07 13:18:59.326472: step 290, duration = 2.187
+2017-11-07 13:19:21.563534: step 300, duration = 2.272
+2017-11-07 13:19:43.508769: step 310, duration = 2.155
+2017-11-07 13:20:05.455659: step 320, duration = 2.204
+2017-11-07 13:20:27.435233: step 330, duration = 2.217
+2017-11-07 13:20:49.669457: step 340, duration = 2.183
+2017-11-07 13:21:11.771047: step 350, duration = 2.269
+```
+
+worker 2
+
+```bash
+root@5dee89c483b9:~/isc# python3 agoniii.py --ps_host 172.17.0.2:2222 --worker_hosts 172.17.0.3:2222,172.17.0.4:2222,172.17.0.5:2222 --job_name worker --task_index 2 --batch_size 10 --num_batches 1000
+2017-11-07 13:05:03.237415: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-07 13:05:03.240412: E tensorflow/stream_executor/cuda/cuda_driver.cc:406] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+2017-11-07 13:05:03.240478: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:158] retrieving CUDA diagnostic information for host: 5dee89c483b9
+2017-11-07 13:05:03.240501: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:165] hostname: 5dee89c483b9
+2017-11-07 13:05:03.240553: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:189] libcuda reported version is: 384.81.0
+2017-11-07 13:05:03.240590: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:369] driver version file contents: """NVRM version: NVIDIA UNIX x86_64 Kernel Module  384.81  Sat Sep  2 02:43:11 PDT 2017
+GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) 
+"""
+2017-11-07 13:05:03.240629: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:193] kernel reported version is: 384.81.0
+2017-11-07 13:05:03.240648: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:300] kernel version seems to match DSO: 384.81.0
+E1107 13:05:03.240814051    9118 ev_epoll1_linux.c:1051]     grpc epoll fd: 3
+2017-11-07 13:05:03.244620: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job ps -> {0 -> 172.17.0.2:2222}
+2017-11-07 13:05:03.244686: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> 172.17.0.3:2222, 1 -> 172.17.0.4:2222, 2 -> localhost:2222}
+2017-11-07 13:05:03.245374: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+2017-11-07 13:05:03.880205: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 1684ffbec1f0586f with config: 
+2017-11-07 13:05:34.221434: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session c87f4207b6002f39 with config: 
+2017-11-07 13:06:11.687356: step 0, duration = 3.210
+2017-11-07 13:06:44.964436: step 10, duration = 3.189
+2017-11-07 13:07:18.488493: step 20, duration = 3.420
+2017-11-07 13:07:51.544850: step 30, duration = 3.333
+2017-11-07 13:08:24.741022: step 40, duration = 3.253
+2017-11-07 13:08:57.975076: step 50, duration = 3.296
+2017-11-07 13:09:31.092049: step 60, duration = 3.310
+2017-11-07 13:10:04.014383: step 70, duration = 3.375
+2017-11-07 13:10:36.906415: step 80, duration = 3.262
+2017-11-07 13:11:10.203384: step 90, duration = 3.398
+2017-11-07 13:11:44.186188: step 100, duration = 3.535
+2017-11-07 13:12:17.316380: step 110, duration = 3.464
+2017-11-07 13:12:43.664519: step 120, duration = 2.226
+2017-11-07 13:13:05.653203: step 130, duration = 2.154
+2017-11-07 13:13:27.845517: step 140, duration = 2.153
+2017-11-07 13:13:49.713598: step 150, duration = 2.189
+2017-11-07 13:14:11.967421: step 160, duration = 2.141
+2017-11-07 13:14:33.790035: step 170, duration = 2.229
+2017-11-07 13:14:55.569306: step 180, duration = 2.155
+2017-11-07 13:15:17.776407: step 190, duration = 2.180
+2017-11-07 13:15:39.924502: step 200, duration = 2.312
+2017-11-07 13:16:02.376864: step 210, duration = 2.250
+2017-11-07 13:16:24.615669: step 220, duration = 2.234
+2017-11-07 13:16:46.760596: step 230, duration = 2.237
+2017-11-07 13:17:08.964042: step 240, duration = 2.279
+2017-11-07 13:17:31.462444: step 250, duration = 2.264
+2017-11-07 13:17:53.951004: step 260, duration = 2.247
+2017-11-07 13:18:16.000208: step 270, duration = 2.253
+2017-11-07 13:18:38.019205: step 280, duration = 2.261
+2017-11-07 13:19:00.170630: step 290, duration = 2.238
+2017-11-07 13:19:22.057922: step 300, duration = 2.156
+2017-11-07 13:19:44.193203: step 310, duration = 2.249
+2017-11-07 13:20:06.250441: step 320, duration = 2.198
+2017-11-07 13:20:28.256212: step 330, duration = 2.125
+2017-11-07 13:20:50.150861: step 340, duration = 2.202
+2017-11-07 13:21:12.111147: step 350, duration = 2.199
+2017-11-07 13:21:34.203245: step 360, duration = 2.183
+```
