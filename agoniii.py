@@ -73,6 +73,10 @@ def alexnet_v2(inputs,
             net = slim.conv2d(net, 384, [3, 3], scope='conv4.9')
             net = slim.conv2d(net, 256, [3, 3], scope='conv5')
             net = slim.max_pool2d(net, [3, 3], 2, scope='pool5')
+            net = slim.fully_connected(net, 128, scope='fc/fc_1')
+            net = slim.fully_connected(net, 128, scope='fc/fc_2')
+            net = slim.fully_connected(net, 128, scope='fc/fc_3')
+            net = slim.fully_connected(net, 128, scope='fc/fc_4')
 
             # Use conv2d instead of fully_connected layers.
             with slim.arg_scope([slim.conv2d],
