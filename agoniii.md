@@ -2231,3 +2231,241 @@ E1108 05:40:12.127392636   14043 ev_epoll1_linux.c:1051]     grpc epoll fd: 3
 2017-11-08 06:19:48.647787: step 990, duration = 2.171
 2017-11-08 06:20:05.608923: across 1000 steps, 2.293 +/- 0.239 sec / batch
 ```
+single node cpu
+
+```bash
+root@5dee89c483b9:~/isc# python3 agoniii.py --worker_hosts localhost:2222 --job_name worker --task_index 0 --batch_size 10 --num_batches 1000
+2017-11-08 08:01:07.229839: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-08 08:01:07.233577: E tensorflow/stream_executor/cuda/cuda_driver.cc:406] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+2017-11-08 08:01:07.233647: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:158] retrieving CUDA diagnostic information for host: 5dee89c483b9
+2017-11-08 08:01:07.233670: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:165] hostname: 5dee89c483b9
+2017-11-08 08:01:07.233726: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:189] libcuda reported version is: 384.81.0
+2017-11-08 08:01:07.233763: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:369] driver version file contents: """NVRM version: NVIDIA UNIX x86_64 Kernel Module  384.81  Sat Sep  2 02:43:11 PDT 2017
+GCC version:  gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) 
+"""
+2017-11-08 08:01:07.233799: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:193] kernel reported version is: 384.81.0
+2017-11-08 08:01:07.233820: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:300] kernel version seems to match DSO: 384.81.0
+E1108 08:01:07.233987452   15603 ev_epoll1_linux.c:1051]     grpc epoll fd: 3
+2017-11-08 08:01:07.237941: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> localhost:2222}
+2017-11-08 08:01:07.238401: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+2017-11-08 08:01:07.864994: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 0678fd233ace0fd6 with config: 
+2017-11-08 08:01:20.045280: step 0, duration = 1.031
+2017-11-08 08:01:30.122087: step 10, duration = 1.009
+2017-11-08 08:01:40.238243: step 20, duration = 1.042
+2017-11-08 08:01:50.301763: step 30, duration = 1.004
+2017-11-08 08:02:00.394787: step 40, duration = 1.008
+2017-11-08 08:02:10.471841: step 50, duration = 1.007
+2017-11-08 08:02:20.566151: step 60, duration = 1.009
+2017-11-08 08:02:30.652791: step 70, duration = 1.010
+2017-11-08 08:02:40.753311: step 80, duration = 1.007
+2017-11-08 08:02:50.816097: step 90, duration = 1.007
+2017-11-08 08:03:00.918179: step 100, duration = 1.011
+2017-11-08 08:03:10.992027: step 110, duration = 1.013
+2017-11-08 08:03:21.094570: step 120, duration = 1.007
+2017-11-08 08:03:31.162590: step 130, duration = 1.009
+2017-11-08 08:03:41.272650: step 140, duration = 1.010
+2017-11-08 08:03:51.354134: step 150, duration = 1.007
+2017-11-08 08:04:01.440954: step 160, duration = 1.004
+2017-11-08 08:04:11.526252: step 170, duration = 1.006
+2017-11-08 08:04:21.628496: step 180, duration = 1.009
+2017-11-08 08:04:31.701703: step 190, duration = 1.004
+2017-11-08 08:04:41.820523: step 200, duration = 1.010
+2017-11-08 08:04:51.883778: step 210, duration = 1.003
+2017-11-08 08:05:01.984041: step 220, duration = 1.002
+2017-11-08 08:05:12.060956: step 230, duration = 1.005
+2017-11-08 08:05:22.173043: step 240, duration = 1.012
+2017-11-08 08:05:32.244326: step 250, duration = 1.011
+2017-11-08 08:05:42.334842: step 260, duration = 1.004
+2017-11-08 08:05:52.413593: step 270, duration = 1.010
+2017-11-08 08:06:02.518601: step 280, duration = 1.009
+2017-11-08 08:06:12.589684: step 290, duration = 1.009
+2017-11-08 08:06:22.698617: step 300, duration = 1.008
+2017-11-08 08:06:32.775773: step 310, duration = 1.008
+2017-11-08 08:06:42.883308: step 320, duration = 1.012
+2017-11-08 08:06:52.958487: step 330, duration = 1.008
+2017-11-08 08:07:03.065811: step 340, duration = 1.008
+2017-11-08 08:07:13.138214: step 350, duration = 1.006
+2017-11-08 08:07:23.239687: step 360, duration = 1.003
+2017-11-08 08:07:33.323976: step 370, duration = 1.010
+2017-11-08 08:07:43.434325: step 380, duration = 1.011
+2017-11-08 08:07:53.514347: step 390, duration = 1.008
+2017-11-08 08:08:03.624526: step 400, duration = 1.007
+2017-11-08 08:08:13.682102: step 410, duration = 1.009
+2017-11-08 08:08:23.781903: step 420, duration = 1.010
+2017-11-08 08:08:33.852666: step 430, duration = 1.006
+2017-11-08 08:08:43.963224: step 440, duration = 1.014
+2017-11-08 08:08:54.035890: step 450, duration = 1.007
+2017-11-08 08:09:04.155372: step 460, duration = 1.006
+2017-11-08 08:09:14.227447: step 470, duration = 1.008
+2017-11-08 08:09:24.325492: step 480, duration = 1.008
+2017-11-08 08:09:34.419390: step 490, duration = 1.004
+2017-11-08 08:09:44.512942: step 500, duration = 1.011
+2017-11-08 08:09:54.597134: step 510, duration = 1.009
+2017-11-08 08:10:04.716330: step 520, duration = 1.000
+2017-11-08 08:10:14.798939: step 530, duration = 1.010
+2017-11-08 08:10:24.902856: step 540, duration = 1.008
+2017-11-08 08:10:34.985973: step 550, duration = 1.007
+2017-11-08 08:10:45.083778: step 560, duration = 1.006
+2017-11-08 08:10:55.157902: step 570, duration = 1.005
+2017-11-08 08:11:05.266648: step 580, duration = 1.005
+2017-11-08 08:11:15.445389: step 590, duration = 1.007
+2017-11-08 08:11:25.556362: step 600, duration = 1.018
+2017-11-08 08:11:35.629136: step 610, duration = 1.006
+2017-11-08 08:11:45.837524: step 620, duration = 1.007
+2017-11-08 08:11:56.022355: step 630, duration = 1.049
+2017-11-08 08:12:06.141564: step 640, duration = 1.011
+2017-11-08 08:12:16.226459: step 650, duration = 1.006
+2017-11-08 08:12:26.323913: step 660, duration = 1.009
+2017-11-08 08:12:36.401077: step 670, duration = 1.003
+2017-11-08 08:12:46.520042: step 680, duration = 1.044
+2017-11-08 08:12:56.579299: step 690, duration = 1.009
+2017-11-08 08:13:06.653412: step 700, duration = 1.007
+2017-11-08 08:13:16.695652: step 710, duration = 1.005
+2017-11-08 08:13:26.780760: step 720, duration = 1.004
+2017-11-08 08:13:36.837649: step 730, duration = 1.002
+2017-11-08 08:13:46.995313: step 740, duration = 1.001
+2017-11-08 08:13:57.043296: step 750, duration = 1.006
+2017-11-08 08:14:07.133540: step 760, duration = 1.003
+2017-11-08 08:14:17.189880: step 770, duration = 1.009
+2017-11-08 08:14:27.271267: step 780, duration = 1.011
+2017-11-08 08:14:37.333569: step 790, duration = 1.008
+2017-11-08 08:14:47.442289: step 800, duration = 1.004
+2017-11-08 08:14:57.518014: step 810, duration = 1.007
+2017-11-08 08:15:07.624553: step 820, duration = 1.008
+2017-11-08 08:15:17.694537: step 830, duration = 1.007
+2017-11-08 08:15:27.798301: step 840, duration = 1.005
+2017-11-08 08:15:37.854264: step 850, duration = 1.004
+2017-11-08 08:15:47.913307: step 860, duration = 1.006
+2017-11-08 08:15:57.963390: step 870, duration = 1.004
+2017-11-08 08:16:08.046696: step 880, duration = 0.999
+2017-11-08 08:16:18.103154: step 890, duration = 1.008
+2017-11-08 08:16:28.187725: step 900, duration = 1.007
+2017-11-08 08:16:38.232489: step 910, duration = 1.000
+2017-11-08 08:16:48.322185: step 920, duration = 1.010
+2017-11-08 08:16:58.389604: step 930, duration = 1.009
+2017-11-08 08:17:08.486578: step 940, duration = 1.002
+2017-11-08 08:17:18.549359: step 950, duration = 1.013
+2017-11-08 08:17:28.617978: step 960, duration = 1.001
+2017-11-08 08:17:38.659185: step 970, duration = 1.007
+2017-11-08 08:17:48.737934: step 980, duration = 1.003
+2017-11-08 08:17:58.801978: step 990, duration = 1.011
+2017-11-08 08:18:07.889808: across 1000 steps, 1.019 +/- 0.101 sec / batch
+```
+
+gpu
+
+```bash
+root@98154222840c:~/isc# python3 agoniii.py --worker_hosts localhost:2222 --job_name worker --task_index 0 --batch_size 10 --num_batches 1000  
+2017-11-08 08:22:42.169794: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-08 08:22:42.272355: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:892] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2017-11-08 08:22:42.272864: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: Tesla K40c major: 3 minor: 5 memoryClockRate(GHz): 0.745
+pciBusID: 0000:01:00.0
+totalMemory: 11.17GiB freeMemory: 11.09GiB
+2017-11-08 08:22:42.272909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K40c, pci bus id: 0000:01:00.0, compute capability: 3.5)
+E1108 08:22:42.328922672   12001 ev_epoll1_linux.c:1051]     grpc epoll fd: 19
+2017-11-08 08:22:42.333069: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> localhost:2222}
+2017-11-08 08:22:42.333747: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+2017-11-08 08:22:42.975038: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 92084ff3b3e87b76 with config: 
+2017-11-08 08:22:45.106942: step 0, duration = 0.051
+2017-11-08 08:22:45.621442: step 10, duration = 0.052
+2017-11-08 08:22:46.136273: step 20, duration = 0.051
+2017-11-08 08:22:46.651325: step 30, duration = 0.052
+2017-11-08 08:22:47.167296: step 40, duration = 0.052
+2017-11-08 08:22:47.684377: step 50, duration = 0.052
+2017-11-08 08:22:48.199452: step 60, duration = 0.052
+2017-11-08 08:22:48.715555: step 70, duration = 0.052
+2017-11-08 08:22:49.231489: step 80, duration = 0.051
+2017-11-08 08:22:49.745849: step 90, duration = 0.051
+2017-11-08 08:22:50.261751: step 100, duration = 0.052
+2017-11-08 08:22:50.777739: step 110, duration = 0.051
+2017-11-08 08:22:51.292806: step 120, duration = 0.051
+2017-11-08 08:22:51.808976: step 130, duration = 0.051
+2017-11-08 08:22:52.324589: step 140, duration = 0.052
+2017-11-08 08:22:52.839547: step 150, duration = 0.051
+2017-11-08 08:22:53.354647: step 160, duration = 0.051
+2017-11-08 08:22:53.869083: step 170, duration = 0.052
+2017-11-08 08:22:54.384582: step 180, duration = 0.051
+2017-11-08 08:22:54.899365: step 190, duration = 0.052
+2017-11-08 08:22:55.416307: step 200, duration = 0.052
+2017-11-08 08:22:55.932724: step 210, duration = 0.052
+2017-11-08 08:22:56.447968: step 220, duration = 0.051
+2017-11-08 08:22:56.963031: step 230, duration = 0.051
+2017-11-08 08:22:57.479537: step 240, duration = 0.052
+2017-11-08 08:22:57.994734: step 250, duration = 0.052
+2017-11-08 08:22:58.511771: step 260, duration = 0.052
+2017-11-08 08:22:59.027057: step 270, duration = 0.052
+2017-11-08 08:22:59.543679: step 280, duration = 0.052
+2017-11-08 08:23:00.059662: step 290, duration = 0.052
+2017-11-08 08:23:00.576132: step 300, duration = 0.052
+2017-11-08 08:23:01.092284: step 310, duration = 0.052
+2017-11-08 08:23:01.609871: step 320, duration = 0.052
+2017-11-08 08:23:02.124670: step 330, duration = 0.051
+2017-11-08 08:23:02.639863: step 340, duration = 0.052
+2017-11-08 08:23:03.155792: step 350, duration = 0.052
+2017-11-08 08:23:03.670440: step 360, duration = 0.051
+2017-11-08 08:23:04.186326: step 370, duration = 0.052
+2017-11-08 08:23:04.703792: step 380, duration = 0.052
+2017-11-08 08:23:05.218165: step 390, duration = 0.052
+2017-11-08 08:23:05.731853: step 400, duration = 0.052
+2017-11-08 08:23:06.246750: step 410, duration = 0.052
+2017-11-08 08:23:06.762797: step 420, duration = 0.052
+2017-11-08 08:23:07.276367: step 430, duration = 0.051
+2017-11-08 08:23:07.791314: step 440, duration = 0.051
+2017-11-08 08:23:08.307660: step 450, duration = 0.052
+2017-11-08 08:23:08.823120: step 460, duration = 0.052
+2017-11-08 08:23:09.339010: step 470, duration = 0.052
+2017-11-08 08:23:09.855927: step 480, duration = 0.052
+2017-11-08 08:23:10.372181: step 490, duration = 0.051
+2017-11-08 08:23:10.888871: step 500, duration = 0.052
+2017-11-08 08:23:11.405527: step 510, duration = 0.052
+2017-11-08 08:23:11.920897: step 520, duration = 0.052
+2017-11-08 08:23:12.437171: step 530, duration = 0.051
+2017-11-08 08:23:12.952242: step 540, duration = 0.051
+2017-11-08 08:23:13.469260: step 550, duration = 0.052
+2017-11-08 08:23:13.983786: step 560, duration = 0.051
+2017-11-08 08:23:14.500685: step 570, duration = 0.052
+2017-11-08 08:23:15.015667: step 580, duration = 0.052
+2017-11-08 08:23:15.530481: step 590, duration = 0.051
+2017-11-08 08:23:16.046380: step 600, duration = 0.052
+2017-11-08 08:23:16.562565: step 610, duration = 0.052
+2017-11-08 08:23:17.078783: step 620, duration = 0.052
+2017-11-08 08:23:17.594503: step 630, duration = 0.052
+2017-11-08 08:23:18.109219: step 640, duration = 0.051
+2017-11-08 08:23:18.624056: step 650, duration = 0.052
+2017-11-08 08:23:19.139862: step 660, duration = 0.052
+2017-11-08 08:23:19.656983: step 670, duration = 0.052
+2017-11-08 08:23:20.173225: step 680, duration = 0.051
+2017-11-08 08:23:20.688259: step 690, duration = 0.051
+2017-11-08 08:23:21.203732: step 700, duration = 0.052
+2017-11-08 08:23:21.719871: step 710, duration = 0.051
+2017-11-08 08:23:22.236237: step 720, duration = 0.052
+2017-11-08 08:23:22.752547: step 730, duration = 0.052
+2017-11-08 08:23:23.269040: step 740, duration = 0.052
+2017-11-08 08:23:23.785041: step 750, duration = 0.052
+2017-11-08 08:23:24.301015: step 760, duration = 0.052
+2017-11-08 08:23:24.815395: step 770, duration = 0.052
+2017-11-08 08:23:25.330125: step 780, duration = 0.052
+2017-11-08 08:23:25.846287: step 790, duration = 0.051
+2017-11-08 08:23:26.362953: step 800, duration = 0.052
+2017-11-08 08:23:26.877267: step 810, duration = 0.051
+2017-11-08 08:23:27.392346: step 820, duration = 0.052
+2017-11-08 08:23:27.909450: step 830, duration = 0.052
+2017-11-08 08:23:28.424568: step 840, duration = 0.052
+2017-11-08 08:23:28.939873: step 850, duration = 0.051
+2017-11-08 08:23:29.454375: step 860, duration = 0.051
+2017-11-08 08:23:29.970810: step 870, duration = 0.052
+2017-11-08 08:23:30.487223: step 880, duration = 0.052
+2017-11-08 08:23:31.003544: step 890, duration = 0.052
+2017-11-08 08:23:31.518972: step 900, duration = 0.051
+2017-11-08 08:23:32.035275: step 910, duration = 0.052
+2017-11-08 08:23:32.549607: step 920, duration = 0.051
+2017-11-08 08:23:33.064863: step 930, duration = 0.052
+2017-11-08 08:23:33.580855: step 940, duration = 0.052
+2017-11-08 08:23:34.095258: step 950, duration = 0.052
+2017-11-08 08:23:34.610488: step 960, duration = 0.052
+2017-11-08 08:23:35.125814: step 970, duration = 0.052
+2017-11-08 08:23:35.640683: step 980, duration = 0.051
+2017-11-08 08:23:36.155500: step 990, duration = 0.052
+2017-11-08 08:23:36.618146: across 1000 steps, 0.053 +/- 0.022 sec / batch
+```
