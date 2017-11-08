@@ -1493,3 +1493,121 @@ E1107 13:05:03.240814051    9118 ev_epoll1_linux.c:1051]     grpc epoll fd: 3
 2017-11-07 13:44:43.230783: step 990, duration = 2.190
 2017-11-07 13:45:02.985217: across 1000 steps, 2.369 +/- 0.292 sec / batch
 ```
+
+gpu
+
+```bash
+root@98154222840c:~/isc# python3 agoniii.py --ps_host 172.17.0.2:2222 --worker_hosts localhost:2222 --job_name worker --task_index 
+0 --batch_size 10 --num_batches 1000
+2017-11-08 04:12:53.434425: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX
+2017-11-08 04:12:53.540688: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:892] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2017-11-08 04:12:53.541149: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Found device 0 with properties: 
+name: Tesla K40c major: 3 minor: 5 memoryClockRate(GHz): 0.745
+pciBusID: 0000:01:00.0
+totalMemory: 11.17GiB freeMemory: 11.09GiB
+2017-11-08 04:12:53.541196: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1120] Creating TensorFlow device (/device:GPU:0) -> (device: 0, name: Tesla K40c, pci bus id: 0000:01:00.0, compute capability: 3.5)
+E1108 04:12:53.597451028    9386 ev_epoll1_linux.c:1051]     grpc epoll fd: 19
+2017-11-08 04:12:53.601806: I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:215] Initialize GrpcChannelCache for job worker -> {0 -> localhost:2222}
+2017-11-08 04:12:53.602471: I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:324] Started server with target: grpc://localhost:2222
+2017-11-08 04:12:54.152074: I tensorflow/core/distributed_runtime/master_session.cc:1004] Start master session 51ff1864a361b77c with config: 
+2017-11-08 04:12:56.288853: step 0, duration = 0.052
+2017-11-08 04:12:56.812456: step 10, duration = 0.052
+2017-11-08 04:12:57.335897: step 20, duration = 0.052
+2017-11-08 04:12:57.859478: step 30, duration = 0.052
+2017-11-08 04:12:58.380929: step 40, duration = 0.052
+2017-11-08 04:12:58.903513: step 50, duration = 0.052
+2017-11-08 04:12:59.427304: step 60, duration = 0.053
+2017-11-08 04:12:59.949832: step 70, duration = 0.052
+2017-11-08 04:13:00.473843: step 80, duration = 0.052
+2017-11-08 04:13:00.997325: step 90, duration = 0.052
+2017-11-08 04:13:01.521073: step 100, duration = 0.052
+2017-11-08 04:13:02.044274: step 110, duration = 0.052
+2017-11-08 04:13:02.568991: step 120, duration = 0.053
+2017-11-08 04:13:03.091371: step 130, duration = 0.052
+2017-11-08 04:13:03.613663: step 140, duration = 0.052
+2017-11-08 04:13:04.136631: step 150, duration = 0.053
+2017-11-08 04:13:04.660123: step 160, duration = 0.053
+2017-11-08 04:13:05.184153: step 170, duration = 0.052
+2017-11-08 04:13:05.706240: step 180, duration = 0.052
+2017-11-08 04:13:06.229650: step 190, duration = 0.052
+2017-11-08 04:13:06.752622: step 200, duration = 0.052
+2017-11-08 04:13:07.275796: step 210, duration = 0.052
+2017-11-08 04:13:07.797992: step 220, duration = 0.052
+2017-11-08 04:13:08.321842: step 230, duration = 0.053
+2017-11-08 04:13:08.844614: step 240, duration = 0.052
+2017-11-08 04:13:09.367390: step 250, duration = 0.052
+2017-11-08 04:13:09.890346: step 260, duration = 0.052
+2017-11-08 04:13:10.412018: step 270, duration = 0.052
+2017-11-08 04:13:10.935822: step 280, duration = 0.053
+2017-11-08 04:13:11.460270: step 290, duration = 0.053
+2017-11-08 04:13:11.984503: step 300, duration = 0.053
+2017-11-08 04:13:12.506810: step 310, duration = 0.052
+2017-11-08 04:13:13.030829: step 320, duration = 0.052
+2017-11-08 04:13:13.556145: step 330, duration = 0.053
+2017-11-08 04:13:14.080456: step 340, duration = 0.053
+2017-11-08 04:13:14.602711: step 350, duration = 0.052
+2017-11-08 04:13:15.125049: step 360, duration = 0.052
+2017-11-08 04:13:15.649230: step 370, duration = 0.053
+2017-11-08 04:13:16.173518: step 380, duration = 0.053
+2017-11-08 04:13:16.696638: step 390, duration = 0.052
+2017-11-08 04:13:17.220102: step 400, duration = 0.053
+2017-11-08 04:13:17.744044: step 410, duration = 0.052
+2017-11-08 04:13:18.269144: step 420, duration = 0.052
+2017-11-08 04:13:18.792227: step 430, duration = 0.052
+2017-11-08 04:13:19.315463: step 440, duration = 0.053
+2017-11-08 04:13:19.840663: step 450, duration = 0.052
+2017-11-08 04:13:20.362502: step 460, duration = 0.052
+2017-11-08 04:13:20.886364: step 470, duration = 0.052
+2017-11-08 04:13:21.409362: step 480, duration = 0.052
+2017-11-08 04:13:21.932437: step 490, duration = 0.052
+2017-11-08 04:13:22.455374: step 500, duration = 0.052
+2017-11-08 04:13:22.979469: step 510, duration = 0.052
+2017-11-08 04:13:23.502904: step 520, duration = 0.052
+2017-11-08 04:13:24.026253: step 530, duration = 0.052
+2017-11-08 04:13:24.550219: step 540, duration = 0.052
+2017-11-08 04:13:25.073146: step 550, duration = 0.052
+2017-11-08 04:13:25.596747: step 560, duration = 0.053
+2017-11-08 04:13:26.119778: step 570, duration = 0.052
+2017-11-08 04:13:26.643893: step 580, duration = 0.052
+2017-11-08 04:13:27.166873: step 590, duration = 0.052
+2017-11-08 04:13:27.689563: step 600, duration = 0.052
+2017-11-08 04:13:28.213803: step 610, duration = 0.052
+2017-11-08 04:13:28.737151: step 620, duration = 0.052
+2017-11-08 04:13:29.260854: step 630, duration = 0.052
+2017-11-08 04:13:29.784023: step 640, duration = 0.052
+2017-11-08 04:13:30.308939: step 650, duration = 0.053
+2017-11-08 04:13:30.832810: step 660, duration = 0.052
+2017-11-08 04:13:31.356278: step 670, duration = 0.052
+2017-11-08 04:13:31.879915: step 680, duration = 0.052
+2017-11-08 04:13:32.402917: step 690, duration = 0.052
+2017-11-08 04:13:32.926124: step 700, duration = 0.052
+2017-11-08 04:13:33.449979: step 710, duration = 0.052
+2017-11-08 04:13:33.973748: step 720, duration = 0.052
+2017-11-08 04:13:34.496020: step 730, duration = 0.052
+2017-11-08 04:13:35.018801: step 740, duration = 0.052
+2017-11-08 04:13:35.541658: step 750, duration = 0.053
+2017-11-08 04:13:36.065037: step 760, duration = 0.052
+2017-11-08 04:13:36.588744: step 770, duration = 0.052
+2017-11-08 04:13:37.111470: step 780, duration = 0.052
+2017-11-08 04:13:37.634837: step 790, duration = 0.052
+2017-11-08 04:13:38.157128: step 800, duration = 0.052
+2017-11-08 04:13:38.681277: step 810, duration = 0.052
+2017-11-08 04:13:39.204777: step 820, duration = 0.052
+2017-11-08 04:13:39.729503: step 830, duration = 0.053
+2017-11-08 04:13:40.252932: step 840, duration = 0.052
+2017-11-08 04:13:40.776199: step 850, duration = 0.052
+2017-11-08 04:13:41.300605: step 860, duration = 0.053
+2017-11-08 04:13:41.822902: step 870, duration = 0.053
+2017-11-08 04:13:42.347057: step 880, duration = 0.052
+2017-11-08 04:13:42.870296: step 890, duration = 0.052
+2017-11-08 04:13:43.393534: step 900, duration = 0.052
+2017-11-08 04:13:43.917992: step 910, duration = 0.052
+2017-11-08 04:13:44.440571: step 920, duration = 0.053
+2017-11-08 04:13:44.965160: step 930, duration = 0.053
+2017-11-08 04:13:45.489360: step 940, duration = 0.052
+2017-11-08 04:13:46.012428: step 950, duration = 0.052
+2017-11-08 04:13:46.535587: step 960, duration = 0.052
+2017-11-08 04:13:47.059056: step 970, duration = 0.052
+2017-11-08 04:13:47.582748: step 980, duration = 0.052
+2017-11-08 04:13:48.106042: step 990, duration = 0.052
+2017-11-08 04:13:48.575917: across 1000 steps, 0.054 +/- 0.023 sec / batch```
