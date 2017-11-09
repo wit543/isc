@@ -41,7 +41,7 @@ def alexnet_v2(inputs,
                dropout_keep_prob=0.5,
                spatial_squeeze=True,
                scope='alexnet_v2'):
-    with tf.variable_scope(scope, 'alexnet_v2', [inputs]) as sc:
+    with tf.variable_scope(scope, 'Variable', [inputs]) as sc:
         end_points_collection = sc.name + '_end_points'
         # Collect outputs for conv2d, fully_connected and max_pool2d.
         with slim.arg_scope([slim.conv2d, slim.fully_connected, slim.max_pool2d],
